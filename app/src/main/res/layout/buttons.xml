@@ -9,16 +9,22 @@
 
     <Button
         android:id="@+id/left"
-        android:layout_margin="10dp"
-        android:text="Nunca Sofri!"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="#18741D"
+        android:textColor="#FFFFFF"
+        android:onClick="onLeftButtonClicked"
+        android:text="Nunca Sofri!" />
 
     <Button
         android:id="@+id/right"
-        android:layout_margin="10dp"
-        android:text="Já Sofri!"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="#690E14"
+        android:textColor="#FFFFFF"
+        android:onClick="onRightButtonClicked"
+        android:text="Já Sofri!" />
 
 </LinearLayout>

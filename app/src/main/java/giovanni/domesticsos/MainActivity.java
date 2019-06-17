@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
@@ -16,6 +17,8 @@ public class MainActivity extends Activity {
     private ArrayList<InfoCard> infoCards;
     private InfoCardArrayAdapter arrayAdapter;
     private int i;
+    private int totalDangerScore;
+    private SwipeFlingAdapterView flingContainer;
 
 
     @Override
@@ -58,7 +61,7 @@ public class MainActivity extends Activity {
 
         arrayAdapter = new InfoCardArrayAdapter(this, R.layout.item, infoCards);
 
-        SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
+        flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
         flingContainer.setAdapter(arrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
@@ -111,21 +114,14 @@ public class MainActivity extends Activity {
         Toast.makeText(ctx, s, Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     *
-     @OnClick(R.id.right)
-     public void right() {
-     flingContainer.getTopCardListener().selectRight();
-     }
 
-     @OnClick(R.id.left)
-     public void left() {
-     flingContainer.getTopCardListener().selectLeft();
-     }
-     *
-     **/
+    public void onLeftButtonClicked(View view) {
+        makeToast(MainActivity.this, "Nunca Sofri!");
+        flingContainer.getTopCardListener().selectLeft();
+    }
 
-
-
-
+    public void onRightButtonClicked(View view) {
+        makeToast(MainActivity.this, "Já Sofri!");
+        flingContainer.getTopCardListener().selectRight();
+    }
 }

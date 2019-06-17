@@ -1,5 +1,7 @@
 package giovanni.domesticsos;
 
+import android.graphics.Color;
+
 public class InfoCard {
 
     private String title;
@@ -9,6 +11,8 @@ public class InfoCard {
     private String photoUrl;
 
     private int dangerScore;
+
+    private String bgColor;
 
     public InfoCard(){}
 
@@ -49,5 +53,13 @@ public class InfoCard {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public String getBgColor() {
+        return bgColor;
+    }
+
+    public void setBgColor(String color){
+        this.bgColor = color;
     }
 }
