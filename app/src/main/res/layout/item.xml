@@ -3,17 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="600dp">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <TextView
-        android:id="@+id/helloText"
+        android:id="@+id/title"
         android:textSize="40sp"
         android:textColor="@android:color/white"
-        android:background="#E339"
-        android:gravity="center"
-        tools:text="hello"
+        android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="100dp"
+        android:layout_marginTop="70dp"/>
+
+    <TextView
+        android:id="@+id/infoText"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="100dp"/>
+
+    </LinearLayout>
 
     <View
         android:id="@+id/item_swipe_left_indicator"
