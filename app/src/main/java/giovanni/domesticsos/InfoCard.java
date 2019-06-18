@@ -16,11 +16,12 @@ public class InfoCard {
 
     public InfoCard(){}
 
-    public InfoCard(String title, String infoText, String photoUrl, int dangerScore) {
+    public InfoCard(String title, String infoText, String photoUrl, int dangerScore, String bgColor) {
         this.title = title;
         this.infoText = infoText;
         this.photoUrl = photoUrl;
         this.dangerScore = dangerScore;
+        this.bgColor = bgColor;
     }
 
     public String getTitle() {

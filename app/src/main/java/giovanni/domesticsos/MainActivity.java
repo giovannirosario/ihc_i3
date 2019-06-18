@@ -1,6 +1,7 @@
 package giovanni.domesticsos;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,10 +14,13 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
+    public static final String TOTAL_SCORE = "giovanni.domesticSOS.TOTAL_SCORE";
+
 
     private ArrayList<InfoCard> infoCards;
     private InfoCardArrayAdapter arrayAdapter;
     private int i;
+    private int count;
     private int totalDangerScore;
     private SwipeFlingAdapterView flingContainer;
 
@@ -27,37 +31,58 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         infoCards = new ArrayList<InfoCard>();
-        InfoCard a = new InfoCard("Violência Psicológica", "Qualquer conduta que cause dano emocional, diminuição da autoestima, controle das ações e do comportamento, como as listadas a seguir:\n" +
-                "– Chantagem emocional\n" +
-                "– Humilhação pública\n" +
-                "– Vigilância e perseguição\n" +
-                "– Constrangimento em público\n" +
-                "– Insulto e humilhação com palavras\n" +
-                "– Isolamento (privar a mulher do convívio com amigos e familiares)\n" +
-                "– Limitação do direito de ir e vir", "auhsdhasd", 5);
+        InfoCard c = new InfoCard("Violência Psicológica", "- Ameaças\n" +
+                "- Perseguição\n" +
+                "- Constrangimento\n" +
+                "- Humilhação\n" +
+                "- Manipulação\n" +
+                "- Isolamento (proibir de sair de casa)\n" +
+                "- Vigilância constante\n" +
+                "- Insultos\n" +
+                "- Chantagem\n" +
+                "- Exploração\n" +
+                "- Limitação do direito de ir e vir\n" +
+                "- Ridicularização\n" +
+                "- Tirar a liberdade de crença", "auhsdhasd", 20, "#8b8378");
 
-        InfoCard b = new InfoCard("Violência Física", "Qualquer conduta que ofenda integridade ou saúde corporal:\n" +
-                "– Puxão ou apertão\n" +
-                "– Empurrão\n" +
-                "– Beliscão\n" +
-                "– Bofetada\n" +
-                "– Soco\n" +
-                "– Mordida\n" +
-                "– Arranhão\n" +
-                "– Pontapé\n" +
-                "– Agressão que pode levar à morte", "auhduas", 6);
+        InfoCard d = new InfoCard("Violência Física", "\n" +
+                "- Tapas, socos e espancamento\n" +
+                "- Atirar objetos, sacudir e apertar os braços\n" +
+                "- Estrangulamento ou sufocamento\n" +
+                "- Lesões com objetos cortantes ou perfurantes\n" +
+                "- Ferimentos causados por queimaduras ou armas de fogo\n" +
+                "- Tortura", "auhduas", 30, "#886262");
 
-        InfoCard c = new InfoCard("Violência Moral", "– Calúnia\n" +
-                "– Difamação\n" +
-                "– Injúria", "uhasdha", 3);
 
-        InfoCard d = new InfoCard("Violência Patrimonial", "– Retenção, subtração ou destruição de objetos, bens, valores, instrumentos de trabalho, documentos pessoais, incluindo os destinados a satisfazer as necessidades.\n" +
-                "– Quando o companheiro é responsável pela renda familiar e usa o dinheiro como punição, deixando de pagar ou comprar algo importante para o bem-estar dela e dos filhos.", "auhsd", 2);
+        InfoCard a = new InfoCard("Violência Moral", "-Rebaixar a mulher por meio de xingamentos\n" +
+                "- Tentar manchar a reputação da mulher\n" +
+                "- Emitir juízos morais sobre a conduta\n" +
+                "- Fazer críticas mentirosas\n" +
+                "- Expor a vida íntima\n" +
+                "- Distorcer e omitir fatos para pôr em dúvida a memória e sanidade da mulher\n" +
+                "- Afirmar falsamente que a mulher praticou crime que ela não cometeu", "uhasdha", 5, "#85414c");
 
+        InfoCard b = new InfoCard("Violência Patrimonial", "- Furto, extorsão ou dano\n" +
+                "- Controlar o dinheiro\n" +
+                "- Deixar de pagar pensão alimentícia\n" +
+                "- Destruição de documentos pessoais\n" +
+                "- Estelionato\n" +
+                "- Privar de bens, valores ou recursos econômicos\n" +
+                "- Causar danos de propósito a objetos da mulher ou dos quais ela goste", "auhsd", 15, "#832136");
+
+        InfoCard e = new InfoCard("Violência Sexual", "- Estupro (inclusive dentro do casamento)\n" +
+                "- Obrigar a mulher a fazer atos sexuais que causam desconforto ou repulsa (fetiches)\n" +
+                "- Impedir o uso de anticoncepcionais ou forçar a mulher a abortar\n" +
+                "- Forçar matrimônio, gravidez ou prostituição\n" +
+                "- Limitar ou anular o exercício dos direitos sexuais e reprodutivos da mulher\n" +
+                "- Exploração sexual", "auhsdusa", 40, "#832136");
         infoCards.add(a);
         infoCards.add(b);
         infoCards.add(c);
         infoCards.add(d);
+        infoCards.add(e);
+
+        count = 0;
 
         arrayAdapter = new InfoCardArrayAdapter(this, R.layout.item, infoCards);
 
@@ -66,32 +91,55 @@ public class MainActivity extends Activity {
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
-                // this is the simplest way to delete an object from the Adapter (/AdapterView)
-                Log.d("LIST", "removed object!");
-                infoCards.remove(0);
-                arrayAdapter.notifyDataSetChanged();
+                //this is called before the others
             }
 
             @Override
             public void onLeftCardExit(Object dataObject) {
                 //Do something on the left!
-                //You also have access to the original object.
-                //If you want to use it just cast it (String) dataObject
-                makeToast(MainActivity.this, "Nunca Sofri!");
+                Log.d("LIST", "Nao sofri");
+                Log.d("LIST", "removed object!");
+                infoCards.remove(0);
+                arrayAdapter.notifyDataSetChanged();
+
+                if(infoCards.isEmpty()){
+                    //makeToast(MainActivity.this, "Acabou!");
+                    Log.d("LIST", "card list is empty");
+
+                    Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                    intent.putExtra(TOTAL_SCORE, String.valueOf(totalDangerScore));
+                    startActivity(intent);
+                }
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
-                makeToast(MainActivity.this, "Já Sofri!");
+                Log.d("LIST", "Ja sofri");
+                InfoCard obj = (InfoCard) dataObject;
+                totalDangerScore += obj.getDangerScore();
+
+                // this is the simplest way to delete an object from the Adapter (/AdapterView)
+                Log.d("LIST", "removed object!");
+                infoCards.remove(0);
+                arrayAdapter.notifyDataSetChanged();
+
+                if(infoCards.isEmpty()){
+                    //makeToast(MainActivity.this, "Acabou!");
+                    Log.d("LIST", "card list is empty");
+
+                    Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                    intent.putExtra(TOTAL_SCORE, String.valueOf(totalDangerScore));
+                    startActivity(intent);
+                }
             }
 
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
                 // Ask for more data here
                 //infoCards.add("XML ".concat(String.valueOf(i)));
-                arrayAdapter.notifyDataSetChanged();
-                Log.d("LIST", "notified");
-                i++;
+                //arrayAdapter.notifyDataSetChanged();
+                //Log.d("LIST", "notified");
+                //i++;
             }
 
             @Override
